@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.oretania.portal.services.AlumnoService;
+
 @Configuration
 public class SecurityConfig {
 
@@ -21,23 +23,28 @@ public class SecurityConfig {
         // return NoOpPasswordEncoder.getInstance();
     }
 
-
     @Bean
     public UserDetailsService users() {
         UserDetails user = User.builder()
                 .username("user")
                 // .password(passwordEncoder().encode("kaka"))
                 .password("{noop}kaka")
-                .authorities("USER")
+                .authorities("LEN")
                 .build();
         UserDetails admin = User.builder()
                 .username("admin")
                 // .password(passwordEncoder().encode("kaka"))
-                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
-                .authorities("USER", "ADMIN")
+                // .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .password("{noop}kaka")
+                .authorities("DIRECTOR")
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
     }
+
+    // @Bean
+    // public UserDetailsService alumnoService() {
+    //     return  new AlumnoService();
+    // }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -49,16 +56,15 @@ public class SecurityConfig {
         return authProvider;
     }
 
-    // @Bean
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http
-                .authorizeRequests()
+        http.authorizeRequests()
                 .anyRequest()
                 .authenticated()
-            .and()
+                .and()
                 .formLogin()
-            .and()
+                .and()
                 .httpBasic();
 
         return http.build();

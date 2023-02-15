@@ -1,30 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"></html>>
 
 <body>
-    <div th:fragment="menu">
-        <nav class="navbar navbar-expand-lg bg-light">
-            <div class="container-fluid">
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" th:href="@{/welcome}"
-                                href="welcome.html">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/matematicas}"
-                                href="welcome.html">Matemáticas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" th:href="@{/logout}"><i class="bi bi-box-arrow-left" th:text="logout"></i></a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
-    </div>
+  <div th:fragment="menu">
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" th:href="@{/welcome}" href="welcome.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/matematicas}" href="welcome.html"
+                sec:hasAnyAuthority="('DIRECTOR','MAT')">Matemáticas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/lengua}" href="welcome.html"
+                sec:hasAnyAuthority="('DIRECTOR','LEN')">Lengua</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/fisica}" href="welcome.html"
+                sec:hasAnyAuthority="('DIRECTOR','FIS')">Fisica</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/quimica}" href="welcome.html"
+                sec:hasAnyAuthority="('DIRECTOR','QUI')">Quimica</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/religion}" href="welcome.html"
+                sec:hasAnyAuthority="('DIRECTOR','REL')">Religion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/ingles}" href="welcome.html"
+                sec:hasAnyAuthority="('DIRECTOR','ING')">Ingles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" th:href="@{/logout}"><i class="bi bi-box-arrow-left"
+                  th:text="logout"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
 </body>
 
 </html>

@@ -3,8 +3,13 @@ package com.oretania.portal.models;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Alumno {
@@ -19,7 +24,8 @@ public class Alumno {
     private String userName;
     private String password;
 
-    
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Asignatura> asignaturas;
 
     public Alumno(int codigo) {
         this.codigo = codigo;
@@ -60,7 +66,6 @@ public class Alumno {
         this.telefono = telefono;
     }
 
-    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -92,7 +97,7 @@ public class Alumno {
     }
 
     public List<Asignatura> getAsignaturas() {
-        return asignaturas;
+        return this.asignaturas;
     }
 
     public void setAsignaturas(List<Asignatura> asignaturas) {

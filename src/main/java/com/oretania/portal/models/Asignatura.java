@@ -1,7 +1,10 @@
 package com.oretania.portal.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Asignatura {
@@ -10,6 +13,8 @@ public class Asignatura {
     private String codigo;
     private String descrripcion;
 
+    @ManyToMany(mappedBy = "asignaturas")
+    private List<Alumno> alumnos;
 
     public Asignatura() {
     }
@@ -32,6 +37,14 @@ public class Asignatura {
 
     public void setDescrripcion(String descrripcion) {
         this.descrripcion = descrripcion;
+    }
+
+    public List<Alumno> getAlumnos() {
+        return alumnos;
+    }
+
+    public void setAlumnos(List<Alumno> alumnos) {
+        this.alumnos = alumnos;
     }
 
     @Override

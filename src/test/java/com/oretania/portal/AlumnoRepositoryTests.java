@@ -87,8 +87,10 @@ class AlumnoRepositoryTests {
 
 
 		Alumno u1OK = repoAlumno.save(u1);
+		repoAlumno.save(u2);
+		repoAlumno.save(u3);
 
-		assertTrue(a6.getDescrripcion().equalsIgnoreCase("QUI"));
+		assertTrue(a6.getDescrripcion().equalsIgnoreCase("Química"));
 	}
 
 }
